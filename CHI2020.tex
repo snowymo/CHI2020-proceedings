@@ -73,6 +73,10 @@
 % option again before submitting your final document.
 \usepackage{todonotes}
 
+%
+\usepackage{gensymb}
+%
+
 % Paper metadata (use plain text, for PDF inclusion and later
 % re-using, if desired).  Use \emtpyauthor when submitting for review
 % so you remain anonymous.
@@ -208,7 +212,7 @@ We propose CollaboVR, an open-source reconfigurable framework for distributed an
 \begin{itemize}
     \item A protocol: connect the portable application to the system. To provide rich and smart visual aids, we choose Chalktalk (an open-source digital presentation and communication language) to support free-hand drawing and 3D objects~\cite{perlin2018chalktalk}. More details will be described later.
     \item A star network: to connect all distributed clients with each other through the server.
-    \item Rich interactions on drawing manipulation: all the visual aids (free-hand drawing or 3D objects) could be further manipulated after being drawn.
+    \item Rich interactions on manipulating the drawings: all the visual aids (free-hand drawing or 3D objects) could be further manipulated after being drawn.
     \item Multiple user arrangement: participants can adjust the location of their views of other participants.
     \item Multiple input orientation: participants can adjust the angle of input area.
 \end{itemize}
@@ -251,9 +255,9 @@ T(ether) is a spatially-aware display system for co-located collaborative manipu
 Andre et al. designed an application to support object manipulation tasks and scene navigation by ? ~\cite{kunert2019multi}
 Some developed the distributed system for remote assistance.
 Virtual Replicas for Remote Assistance is a remote collaboration system, allowing a remote expert to guide local users to assemble machine parts by using virtual replicas~\cite{oda2015virtual}.
-Others like Geollery~\cite{du2019geollery} and ShareVR~\cite{gugenheimer2017sharevr}. Geollery ? social network ? sharevr ? cross-device? might need communication but not strongly rely on.
+Others like Geollery~\cite{du2019geollery, du2016social} and ShareVR~\cite{gugenheimer2017sharevr}. Geollery ? social network ? sharevr ? cross-device? might need communication but not strongly rely on.
 
-For collaborative purposes like game, social network and telepresence, the engagement and sense of being there is more important. In those scenarios, the communication is not the focus. While for collaborative purposes such as productive work, assistance or object manipulation, which require more complicated and specific operation during the collaboration, the communication performance becomes more important. That is why we want to build a reconfigurable framework to fit different purposes of collaboration.
+For collaborative purposes like social network and telepresence, the engagement and sense of being there is the most important. In those scenarios, the communication is not the focus. While for collaborative purposes such as productive work, game, assistance or object manipulation, which require complicated and specific operation and information transfer during the collaboration, the communication performance becomes more important. That is why we want to build a reconfigurable framework to fit different purposes of collaboration.
 
 Then we take a look at the trending of communication with immersive environments.
 
@@ -273,45 +277,93 @@ physical spaces to shared virtual spaces to understand how social presence, toge
 
 %Tan et al. built a face-to-face presentation system for remote audiences ~\cite{gazeAwareness}. Interacting with digital content in a shared space is common too. 
 
-\section{System Overview//CollaboVR}
-talking about architecture with figures
-Explain the entire pipeline and Chalktalk
-<diagram> 
+\section{CollaboVR Overview}
+In this section, we present an overview of CollaboVR's system architecture. CollaboVR consists of a protocol which serialize the display data from an application and then de-serialize and render them into graphics. Currently we test CollaboVR with application Chalktalk~\cite{perlin2018chalktalk}. Chalktalk is an open-source digital presentation and communication language. It allows a presenter to create and interact with animated digital sketches on a blackboard-like interface. There are some other smart sketch-based online software such as Autodraw~\cite{Autodraw}, sketch2code~\cite{Sketch2code} and Miro~\cite{Miro} can assist drawing. We chose to use Chalktalk because it is an open-source platform. We can easily define the dataflow between the application and CollaboVR. That means if the API of input and output of the application is accessible, CollaboVR can be easily adapted to use multiple applications as the content provider.
 
-\begin{figure}[t]
+CollaboVR consists of a star network. The network is written in Node.js and C\#. It synchronizes data across devices and supports custom data formats. For CollaboVR, we have two kinds of information: rendering data and user data. In terms of rendering data, we first pass the user input from each client to the server, then the server transmits the user input with the user identifier to the application, next the server receives the serialized display data from the application, finally the server broadcast the display data to each client for rendering. In terms of user data, we currently don't do any process on it so we directly broadcast the user avatar and audio data to each client.
+
+CollaboVR consists of rich interactions on manipulating the drawings. After the clients receive and render the display data from the application, the display data is considered as interactive object in 3D world. We provide manipulation on these objects for users to express their ideas easily. The manipulation includes: duplication, transformation(rotating, scaling and translation), deletion, and colorization.
+
+To deploy CollaboVR, it only requires a VR device running Unity for each client, a server machine running the Node.js (if a VR client needs to be run on a Windows machine, the server code could run on one of the client machines) and a router (optional) which ensures the low latency for data transmission. If a router is not available for setup, all the clients can talk to server through IP address over the Internet. 
+
+% talking about architecture with figures
+% Explain the entire pipeline and Chalktalk
+\begin{figure*}[htb!]
  \centering
- \includegraphics[width=0.75\columnwidth]{dataflow}
- \caption{System Diagram for CollabVR. 
+ \includegraphics[width=1.75\columnwidth]{workflow}
+ \caption{The workflow of CollaboVR.
  %Chalktalk's content, \textit{sketch} is composed of graphical elements such as point data. 
  // TODO
- 1) \textit{Sketch} data are serialized on the Chalktalk client side every frame and 2) sent as a data array to the Chalktalk server, 3) to the Holojam relay, and then 4) to all Unity clients, where 5) the data are rendered on content board(s). 6) MR user input is sent back through the pipeline to the Chalktalk client and 7) translated into HTML canvas mouse events. 8) Avatar synchronization data are also sent between clients using the Holojam relay.}~\label{fig:datapipeline}
-\end{figure}
+ %1) \textit{Sketch} data are serialized on the Chalktalk client side every frame and 2) sent as a data array to the Chalktalk server, 3) to the Holojam relay, and then 4) to all Unity clients, where 5) the data are rendered on content board(s). 6) MR user input is sent back through the pipeline to the Chalktalk client and 7) translated into HTML canvas mouse events. 8) Avatar synchronization data are also sent between clients using the Holojam relay.
+ }~\label{fig:workflow}
+\end{figure*}
+
+Figure ~\ref{fig:workflow} presents the workflow of CollaboVR per frame. First, figure~\ref{fig:workflow}(a) and figure~\ref{fig:workflow}(b) show the third-person perspective view of the VR client before data synchronization. The user in figure~\ref{fig:workflow}(a) is drawing a dinosaur to show what is his or her favorite animal. The user in figure~\ref{fig:workflow}(b) is waiting. Then the data including both users' identifier, avatar information, audio and the drawing input information will be serialized and send to the server. As figure~\ref{fig:workflow}(c) shows, different data will be processed with different label such as \verb|AVATAR_JOIN|, \verb|STYLUS|, \verb|SELECT_OBJ|, \verb|MOVE_OBJ|. The server is behaved as a state-less machine. So the server send the drawing input related data to application API and broadcast avatar related code to all the clients. Later, the application received the drawing input data from the server as figure~\ref{fig:workflow}(d) shows. The application (Chalktalk) will process the input and turn the drawing into 3D objects. We can see that the free-hand drawing dinosaur becomes a 3D dinosaur with pre-designed animation. Our protocol serialized \verb|DisplayData| from application (Chalktalk) and send to the server. The server broadcast \verb|DisplayData| to all the clients. Finally, all the VR clients can see the interactive 3D objects and each other as figure~\ref{fig:workflow}(e) and figure~\ref{fig:workflow}(f) show.
 
 \section{Design Space}
+We propose two variables in the design space of CollaboVR: user arrangement and input orientation. Emphasized by the previous work on workspace awareness that maintaining and enhancing workspace awareness enable participants to work together more effectively. We add a dimension that users can change their views of other participants. In other words, they can manipulate the arrangement of other users. 
+
+Inspired by the previous work on collaborative sensemaking, we notice that multiple and shard large displays are good for collaborative work in terms of 2D information. CollaboVR is an immersive 3D graphics world. Instead of "display", we pre-placed multiple "interactive board" in the virtual environment. That means, if the z coordinate of the content is 0, the connect will be placed on the interactive board. If the content has positive or negative z coordinate, user will see that the content is not stitch to the interactive board. The relative coordinate system is the center of the corresponding interactive board. We add a dimension that users can change the input orientation of the interactive board in axis x (from 0$^{\circ}$ to 90$^{\circ}$). Considering the learning curve for the users, we simply provide two edge options: vertical (0$^{\circ}$) and horizontal (90$^{\circ}$) interactive board.
+
 \subsection{User Arrangement}
+Currently, we provide two user arrangements: (1) default and (2) mirrored. Default user arrangement means that the virtual environment of each user will be overlapped directly. As figure~\ref{fig:userarrangement} shows, figure~\ref{fig:userarrangement}(a) and figure~\ref{fig:userarrangement}(b) are two top-down view for each client. The green rectangle shows their available tracking area roughly. The blue rectangles show the interactive boards. Figure~\ref{fig:userarrangement}(c) shows the default user arrangement. The clients will see other participants in their original position. For mirrored user arrangement, all the other users' location will be flipped to the other side of the interactive board. See figure~\ref{fig:userarrangement}(d), user2 is in mirrored user arrangement, and user1 is flipped to the other side of the left interactive board because user1 is looking at that board. Spot A is the same content that both users are looking at. After the flipping operation, the gaze direction of user1 and user2 are maintained. Different from FacingBoard~\cite{li2014interactive}, the content is not mirror reversed so the content is still correct to the viewer. In this user arrangement, the users can see each other for better workspace awareness. Figure~\ref{fig:userarrangement}(f) shows how we process multiple users in this setup. Each user will be flipped based on their looking direction.
+
+\begin{figure}[t!]
+ \centering
+ \includegraphics[width=0.9\columnwidth]{userarrangement.jpg}
+ \caption{Design space: user arrangement.
+ }~\label{fig:userarrangement}
+\end{figure}
+
 \subsection{Input Orientation}
+CollaboVR enables the user to adjust the interactive board for input: vertical or horizontal board. By default, the interactive board is vertical as a large display, but in 3D. As figure~\ref{fig:inputorientation}(a) shows, user's experience is close to writing on a white-board. When user turns on the horizontal interactive board, it is close to writing on a tablet or desk, as figure~\ref{fig:inputorientation}(b) shows. For other users who are not writing, the content will be rendered real-timely on the vertical board. By doing this we avoid the situation that the content is not readable for all the users around a table. Considering the reach distance when writing on a horizontal plane is different from on a vertical plane, we adjust the scale of the horizontal board. When user is writing on the horizontal board, he or she is free to look at the personal horizontal board or the shared vertical board. To enhance the awareness of where the user is writing on, we render the projection point of user's controller as a 3D cursor.
+
+\begin{figure}[b!]
+ \centering
+ \includegraphics[width=0.9\columnwidth]{inputorientation.jpg}
+ \caption{Design space: input orientation.
+ }~\label{fig:inputorientation}
+\end{figure}
 
 \section{System Implementation}
-\subsection{Protocol}
-\subsection{Tracking for co-located and distributed scenarios}
+To build CollaboVR, we implement a network framework and a flexible protocol, a calibration approach for co-located users and user interface for drawing manipulation.
+
+\subsection{Network and Protocol}
+The network is a star network using UDP. The reason we chose UDP is that we value low-latency more than the accuracy. The server-side code is written in Node.js and the client code is written in Node.js and Unity C\#. We defined \textit{synchronizable object}: an object needs to synchronized each frame for the client who registered it. Each synchronizable object has a label and data stream. The label is a unique identifier for client to register. The data stream includes the frequency of sending this object and the real-time data. We provide two kinds of frequency in the system: one-time and per frame. One-time synchronizable object is actually a command. It doesn't happen for each frame and not need to be synchronized for each frame. For command object, we use two-way handshaking. The client sends the object to the server, the server returns an object including acknowledgement back to the client, then the client de-registers the object with this label. Per frame synchronizable object could be the current avatar representation, the audio data or the display data from the application. We design a protocol to wrap all the display data. The data protocol includes information of all the rendered points by encoding the attributes such as position, width and color. Each client de-serialize the data from the server and render the points as lines and meshes.
+
+\subsection{Calibration for Co-located Scenarios}
+CollaboVR is working for both co-located and distributed scenarois. For distributed users, we simply overlap their virtual environments because they don't have any spatial relationship. For co-located users, we need to calibrate all the users so they are all in the same coordinate system. The key idea for calibration is that different clients should have a shared proxy. For example, all the co-located users can see the same image in that environment. Vuforia~\cite{Vuforia} is widely used for image recognition and tracking. Similarly, a shared map is helpful too~\cite{Hololens}. Here we use Vive Pro as the co-located device. The shared proxy is the Vive base station. Each machine running Vive can retrieve the transformation information of the base station. Because each machine has their own coordinate systems, we will have the same mount of the position and rotation of base station. We pre-chose one base station as the proxy based on the unique serial number. Then we use the first client which connected to the server as the reference node. All the following clients will apply the inverse matrix between the base station of reference node and their own base station to their VR environment. See figure~\ref{vivepro}, user1 is drawing a physics model. The left image shows the first-player perspective view from user2 and the right image shows a front view of the environment.
+
+\begin{figure}[tb!]
+ \centering
+ \includegraphics[width=0.9\columnwidth]{vivepro.jpg}
+ \caption{Calibration results for co-located users.
+ }~\label{fig:vivepro}
+\end{figure}
+
+\subsection{Drawing Manipulation}
+CollaboVR includes a user interface for users to manipulate the objects after drawing. We provide the functionality of duplication, transforming, deletion and colorizing. To achieve this, we design a pie menu triggered by the controller. Here is the workflow for manipulation: first, we place the controller hovering over the drawing of interest; second, press the thumbstick of the dominate controller; then, the pie menu shows up as figure~\ref{fig:userinterface}; Move the thumbstick to select the specific menu; Apply corresponding movement in terms of the command and release the thumbstick. If the menu is deletion, the operation applies immediately after release. If the menu is transformation, user needs to move the controller to complete rotation, scaling and translation. If the menu is copy, the duplicated object will be placed at the position where the user releases thumbstick. In addition, we enable colorization through another button. User can drag the color from the color palette to any drawing like world builder\footnote{\url{https://www.youtube.com/watch?v=FheQe8rflWQ}}. Colorization is triggered by button one as figure~\ref{fig:userinterface} shows. Considering the system is working identical to left-hand users and right-hand users, button two is designed to switch the commands between two controllers.
+
+\begin{figure}[tb!]
+ \centering
+ \includegraphics[width=0.9\columnwidth]{userinterface.jpg}
+ \caption{User interface for drawing manipulation.
+ }~\label{fig:userinterface}
+\end{figure}
 
 \section{Use Cases}
-\subsubsection{Brainstorming tool}
-\subsubsection{Presentation}
+CollaboVR is designed as a reconfigurable framework for users to communicate in VR. Here we envision the potential user cases for CollaboVR.
+
 \subsubsection{Daily Life Schedule}
+
+\subsubsection{Presentation}
+
 \subsubsection{Spatial Arrangement}
+
 \subsubsection{Item Design}
 
-%functionalities
-%\subsection{User Study: Item Design}
-%overall
-%different user representation
-%different input orientations
-%\subsection{User Study: One-on-One }
-%some are the same(or we can skip that)
-%application is related to the configuration
 \section{User Study: System Evaluation}
-In this study, we evaluated the interaction cycle, design variables and prototype implementation of CollaboVR. We were interested in how [...] users could use the system. During the study, we collected primarily qualitative feedback to gain insight into the experience of using the system.
+In this study, we evaluated the interaction cycle, design variables and prototype implementation of CollaboVR. We were interested in how participants use the system. During the study, we collected primarily qualitative feedback to gain insight into the experience of using the system.
 \subsection{Tasks and Procedure}
 [...]
 \subsubsection{Living room design}
