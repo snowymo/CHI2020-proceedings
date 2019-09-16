@@ -152,12 +152,18 @@
     \email{e-mail address}}\\
 }
 
- \teaser{
- \includegraphics[width=0.8\paperwidth]{figures/sigchi-logo}
-  \caption{Insert a caption below each figure. Do not alter the
+\teaser{
+\begin{subfigure}
+    \includegraphics[width=0.2\paperwidth]{figures/sigchi-logo}
+    \includegraphics[width=0.2\paperwidth]{presentation.jpg}
+    \includegraphics[width=0.2\paperwidth]{spatialarrangement.jpg}
+    \includegraphics[width=0.2\paperwidth]{itemdesign.jpg}
+\end{subfigure}
+\caption{Insert a caption below each figure. Do not alter the
     Caption style.  One-line captions should be centered; multi-line
-    should be justified. }~\label{fig:figureT}
- } 
+    should be justified. }
+\label{fig:teaser}
+} %using an entire image for final version
  
 \maketitle
 
@@ -224,7 +230,7 @@ Our main contributions in this papers are:
     \item Qualitative feedback indicates that different combinations of two key variables (user arrangement and input orientation) work differently for communication in terms of different collaborative purposes.
 \end{enumerate}
 
-\section{Scenario[opt]}
+%\section{Scenario[opt]}
 
 \section{Related Work}
 % not smooth
@@ -248,37 +254,49 @@ MetaSpace did full body tracking for distributed users to create a better sense 
 Much work has been done in collaborative applications in VR/MR.
 Some focused on multi-user gaming experiences. SynchronizAR designed a registration algorithm for mobile AR so the participants could join the co-located experience and not need to take extra steps to ensure good-quality positional tracking~\cite{huo2018synchronizar}.
 Some focused on developing telepresence and bridging the gap between physical world and virtual world. InForce created a set of novel interaction techniques including haptic feedback for distributed collaboration ~\cite{nakagaki2019inforce}.
+Holoportation demonstrated 3D reconstructions of an entire space including people reconstruction~\cite{orts2016holoportation}.
 Immersive Group-to-Group Telepresence ~\cite{beck2013immersive}
 Some designed a collaborative tool for productive work like editing and modeling. SpaceTime focused on improving the experience for two experts collaborating on design work together~\cite{xia2018spacetime}. 
 Some put more effort on object manipulation and navigation.
 T(ether) is a spatially-aware display system for co-located collaborative manipulation and animation of objects ~\cite{lakatos2014t}. Trackable markers on pads and digital gloves allow participants to use gestures to manipulate objects in space.
-Andre et al. designed an application to support object manipulation tasks and scene navigation by ? ~\cite{kunert2019multi}
+Andre et al. designed an application to support object manipulation tasks and scene navigation from different views ~\cite{kunert2019multi}.
 Some developed the distributed system for remote assistance.
 Virtual Replicas for Remote Assistance is a remote collaboration system, allowing a remote expert to guide local users to assemble machine parts by using virtual replicas~\cite{oda2015virtual}.
-Others like Geollery~\cite{du2019geollery, du2016social} and ShareVR~\cite{gugenheimer2017sharevr}. Geollery ? social network ? sharevr ? cross-device? might need communication but not strongly rely on.
+Others like Geollery~\cite{du2019geollery, du2016social} created an interactive mixed reality (MR) social media platform.
 
-For collaborative purposes like social network and telepresence, the engagement and sense of being there is the most important. In those scenarios, the communication is not the focus. While for collaborative purposes such as productive work, game, assistance or object manipulation, which require complicated and specific operation and information transfer during the collaboration, the communication performance becomes more important. That is why we want to build a reconfigurable framework to fit different purposes of collaboration.
+For collaborative purposes like social network and telepresence, the engagement and sense of being there is the most important. In those scenarios, the communication is not the focus. While for collaborative purposes such as productive work, game, assistance or object manipulation, which require complicated and specific operation and information transfer during the collaboration, the communication performance becomes more important. We want to build a reconfigurable framework to fit different purposes of collaboration.
 
 Then we take a look at the trending of communication with immersive environments.
-
-// fill with old submission and go through chi+cscw+uist for recent 5 years.
+% fill with old submission and go through chi+cscw+uist for recent 5 years.
+Some proposed asymmetrical communication. ShareVR enables communication between an HMD user and a non-HMD user~\cite{gugenheimer2017sharevr}. By using floor projection and mobile displays to visualize the virtual world, the non-HMD user is able to interact with the HMD user and become part of the VR experience. Mutual human actuation~\cite{cheng2017mutual} run pairs of users at the same time and have them provide human actuation to each other. The communication between the pair is through shared interactive props.
 
 Interacting with digital content in a shared space is common too. Three's Company~\cite{tang2010three} explored collaborative activities over connected digital tabletops which support a shared sense of presence among people and artifacts associated with the task. 
-Tele-Board~\cite{gumienny2011tele} designed a groupware system specialized in creative working modes using traditional whiteboard and sticky notes in digital form for distributed users.
-Hrvoje Benko et al. proposed a unique spatial AR system that combines dynamic projection mapping and multiple perspective views to support face-to-face interaction~\cite{benko2014dyadic}. 
-Holoportation demonstrated 3D reconstructions of an entire space, including people~\cite{orts2016holoportation}.
+Dyadic projected spatial augmented reality 
 TwinSpace supports deep interconnectivity and flexible mappings between virtual and physical spaces~\cite{reilly2010twinspace}.
 Your Place and Mine explored three ways of mapping two differently sized
 physical spaces to shared virtual spaces to understand how social presence, togetherness, and movement are influenced~\cite{sra2018}.
+Tan et al. built a face-to-face presentation system for remote audiences ~\cite{gazeAwareness}.
+Tele-Board~\cite{gumienny2011tele} designed a groupware system specialized in creative working modes using traditional whiteboard and sticky notes in digital form for distributed users.
+Hrvoje Benko et al. proposed a unique spatial AR system that enables two users to interact with a shared virtual scene and each other in a
+face to face arrangement~\cite{benko2014dyadic}. 
+We found out quite a few work focused on two-user or pair communication. Our work proposed a solution to scale the amount of the participants. In addition, we noticed much work experiment the face-to-face setup with shared display or round table for communication. We propose two variance: user arrangement and input orientation to investigate their advantages and limitation.
 
 %In daily life while speaking to others, we commonly use gestures or visual aids~\cite{tversky2003human} to help present ideas, either subconsciously or purposefully. Visual aids can be drawn on paper, a whiteboard\cite{cherubini2007let}, or a screen via desktop sharing in video conferences. A key task for collaborators is visually, physically, and cognitively following the content being drawn and the people who are speaking with. They need a clear view of the content under discussion and need to be aware of other collaborators' presence when communicating~\cite{ishii1992clearboard}. They should also understand and be able to reason about what is being shown and said. 
 %According to Regenbrecht et al.~\cite{regenbrecht2015mutual}, facial interaction like eye contact and mutual gaze has always been recognized as an important requirement for effective visual communications. That suggests it is helpful during communication to look at the person who is talking or at least be aware of the person's location. 
 %Oftentimes, participants in a group discussion also need to move around physically to follow the content and each other. In addition, following and presenting content requires the ability to express ideas clearly as well as a fair understanding of the ideas. This may become particularly challenging in discussions revolving around, for example, the placement and design of 3D objects, which cannot easily be visualized using traditional 2D communication media (paper, whiteboard, and so on).
 
-%Tan et al. built a face-to-face presentation system for remote audiences ~\cite{gazeAwareness}. Interacting with digital content in a shared space is common too. 
-
 \section{CollaboVR Overview}
 In this section, we present an overview of CollaboVR's system architecture. CollaboVR consists of a protocol which serialize the display data from an application and then de-serialize and render them into graphics. Currently we test CollaboVR with application Chalktalk~\cite{perlin2018chalktalk}. Chalktalk is an open-source digital presentation and communication language. It allows a presenter to create and interact with animated digital sketches on a blackboard-like interface. There are some other smart sketch-based online software such as Autodraw~\cite{Autodraw}, sketch2code~\cite{Sketch2code} and Miro~\cite{Miro} can assist drawing. We chose to use Chalktalk because it is an open-source platform. We can easily define the dataflow between the application and CollaboVR. That means if the API of input and output of the application is accessible, CollaboVR can be easily adapted to use multiple applications as the content provider.
+
+\begin{figure*}[ht!]
+ \centering
+ \includegraphics[width=1.75\columnwidth]{workflow}
+ \caption{The workflow of CollaboVR.
+ %Chalktalk's content, \textit{sketch} is composed of graphical elements such as point data. 
+ // TODO
+ %1) \textit{Sketch} data are serialized on the Chalktalk client side every frame and 2) sent as a data array to the Chalktalk server, 3) to the Holojam relay, and then 4) to all Unity clients, where 5) the data are rendered on content board(s). 6) MR user input is sent back through the pipeline to the Chalktalk client and 7) translated into HTML canvas mouse events. 8) Avatar synchronization data are also sent between clients using the Holojam relay.
+ }~\label{fig:workflow}
+\end{figure*}
 
 CollaboVR consists of a star network. The network is written in Node.js and C\#. It synchronizes data across devices and supports custom data formats. For CollaboVR, we have two kinds of information: rendering data and user data. In terms of rendering data, we first pass the user input from each client to the server, then the server transmits the user input with the user identifier to the application, next the server receives the serialized display data from the application, finally the server broadcast the display data to each client for rendering. In terms of user data, we currently don't do any process on it so we directly broadcast the user avatar and audio data to each client.
 
@@ -288,15 +306,6 @@ To deploy CollaboVR, it only requires a VR device running Unity for each client,
 
 % talking about architecture with figures
 % Explain the entire pipeline and Chalktalk
-\begin{figure*}[htb!]
- \centering
- \includegraphics[width=1.75\columnwidth]{workflow}
- \caption{The workflow of CollaboVR.
- %Chalktalk's content, \textit{sketch} is composed of graphical elements such as point data. 
- // TODO
- %1) \textit{Sketch} data are serialized on the Chalktalk client side every frame and 2) sent as a data array to the Chalktalk server, 3) to the Holojam relay, and then 4) to all Unity clients, where 5) the data are rendered on content board(s). 6) MR user input is sent back through the pipeline to the Chalktalk client and 7) translated into HTML canvas mouse events. 8) Avatar synchronization data are also sent between clients using the Holojam relay.
- }~\label{fig:workflow}
-\end{figure*}
 
 Figure ~\ref{fig:workflow} presents the workflow of CollaboVR per frame. First, figure~\ref{fig:workflow}(a) and figure~\ref{fig:workflow}(b) show the third-person perspective view of the VR client before data synchronization. The user in figure~\ref{fig:workflow}(a) is drawing a dinosaur to show what is his or her favorite animal. The user in figure~\ref{fig:workflow}(b) is waiting. Then the data including both users' identifier, avatar information, audio and the drawing input information will be serialized and send to the server. As figure~\ref{fig:workflow}(c) shows, different data will be processed with different label such as \verb|AVATAR_JOIN|, \verb|STYLUS|, \verb|SELECT_OBJ|, \verb|MOVE_OBJ|. The server is behaved as a state-less machine. So the server send the drawing input related data to application API and broadcast avatar related code to all the clients. Later, the application received the drawing input data from the server as figure~\ref{fig:workflow}(d) shows. The application (Chalktalk) will process the input and turn the drawing into 3D objects. We can see that the free-hand drawing dinosaur becomes a 3D dinosaur with pre-designed animation. Our protocol serialized \verb|DisplayData| from application (Chalktalk) and send to the server. The server broadcast \verb|DisplayData| to all the clients. Finally, all the VR clients can see the interactive 3D objects and each other as figure~\ref{fig:workflow}(e) and figure~\ref{fig:workflow}(f) show.
 
@@ -326,13 +335,13 @@ CollaboVR enables the user to adjust the interactive board for input: vertical o
 \end{figure}
 
 \section{System Implementation}
-To build CollaboVR, we implement a network framework and a flexible protocol, a calibration approach for co-located users and user interface for drawing manipulation.
+To build CollaboVR, we implement a network framework and a flexible protocol, a calibration approach for co-located users, user interface for drawing manipulation and other functionalities.
 
 \subsection{Network and Protocol}
 The network is a star network using UDP. The reason we chose UDP is that we value low-latency more than the accuracy. The server-side code is written in Node.js and the client code is written in Node.js and Unity C\#. We defined \textit{synchronizable object}: an object needs to synchronized each frame for the client who registered it. Each synchronizable object has a label and data stream. The label is a unique identifier for client to register. The data stream includes the frequency of sending this object and the real-time data. We provide two kinds of frequency in the system: one-time and per frame. One-time synchronizable object is actually a command. It doesn't happen for each frame and not need to be synchronized for each frame. For command object, we use two-way handshaking. The client sends the object to the server, the server returns an object including acknowledgement back to the client, then the client de-registers the object with this label. Per frame synchronizable object could be the current avatar representation, the audio data or the display data from the application. We design a protocol to wrap all the display data. The data protocol includes information of all the rendered points by encoding the attributes such as position, width and color. Each client de-serialize the data from the server and render the points as lines and meshes.
 
 \subsection{Calibration for Co-located Scenarios}
-CollaboVR is working for both co-located and distributed scenarois. For distributed users, we simply overlap their virtual environments because they don't have any spatial relationship. For co-located users, we need to calibrate all the users so they are all in the same coordinate system. The key idea for calibration is that different clients should have a shared proxy. For example, all the co-located users can see the same image in that environment. Vuforia~\cite{Vuforia} is widely used for image recognition and tracking. Similarly, a shared map is helpful too~\cite{Hololens}. Here we use Vive Pro as the co-located device. The shared proxy is the Vive base station. Each machine running Vive can retrieve the transformation information of the base station. Because each machine has their own coordinate systems, we will have the same mount of the position and rotation of base station. We pre-chose one base station as the proxy based on the unique serial number. Then we use the first client which connected to the server as the reference node. All the following clients will apply the inverse matrix between the base station of reference node and their own base station to their VR environment. See figure~\ref{vivepro}, user1 is drawing a physics model. The left image shows the first-player perspective view from user2 and the right image shows a front view of the environment.
+CollaboVR is working for both co-located and distributed scenarois. For distributed users, we simply overlap their virtual environments because they don't have any spatial relationship. For co-located users, we need to calibrate all the users so they are all in the same coordinate system. The key idea for calibration is that different clients should have a shared proxy. For example, all the co-located users can see the same image in that environment. Vuforia~\cite{Vuforia} is widely used for image recognition and tracking. Similarly, a shared map is helpful too~\cite{Hololens}. Here we use Vive Pro as the co-located device. The shared proxy is the Vive base station. Each machine running Vive can retrieve the transformation information of the base station. Because each machine has their own coordinate systems, we will have the same mount of the position and rotation of base station. We pre-chose one base station as the proxy based on the unique serial number. Then we use the first client which connected to the server as the reference node. All the following clients will apply the inverse matrix between the base station of reference node and their own base station to their VR environment. See figure~\ref{fig:vivepro}, user1 is drawing a physics model. The left image shows the first-player perspective view from user2 and the right image shows a front view of the environment.
 
 \begin{figure}[tb!]
  \centering
@@ -342,7 +351,7 @@ CollaboVR is working for both co-located and distributed scenarois. For distribu
 \end{figure}
 
 \subsection{Drawing Manipulation}
-CollaboVR includes a user interface for users to manipulate the objects after drawing. We provide the functionality of duplication, transforming, deletion and colorizing. To achieve this, we design a pie menu triggered by the controller. Here is the workflow for manipulation: first, we place the controller hovering over the drawing of interest; second, press the thumbstick of the dominate controller; then, the pie menu shows up as figure~\ref{fig:userinterface}; Move the thumbstick to select the specific menu; Apply corresponding movement in terms of the command and release the thumbstick. If the menu is deletion, the operation applies immediately after release. If the menu is transformation, user needs to move the controller to complete rotation, scaling and translation. If the menu is copy, the duplicated object will be placed at the position where the user releases thumbstick. In addition, we enable colorization through another button. User can drag the color from the color palette to any drawing like world builder\footnote{\url{https://www.youtube.com/watch?v=FheQe8rflWQ}}. Colorization is triggered by button one as figure~\ref{fig:userinterface} shows. Considering the system is working identical to left-hand users and right-hand users, button two is designed to switch the commands between two controllers.
+CollaboVR includes a user interface for users to manipulate the objects after drawing. We provide the functionality of duplication, transforming, deletion and colorizing. To achieve this, we design a pie menu triggered by the controller. Here is the workflow for manipulation: first, we place the controller hovering over the drawing of interest; second, press the thumbstick of the dominate controller; then, the pie menu shows up as figure~\ref{fig:userinterface}; Move the thumbstick to select the specific menu; Apply corresponding movement in terms of the command and release the thumbstick. If the menu is deletion, the operation applies immediately after release. If the menu is transformation, user needs to move the controller to complete rotation, scaling and translation. If the menu is copy, the duplicated object will be placed at the position where the user releases thumbstick. In addition, we enable colorization through another button. User can drag the color from the color palette to any drawing like world builder\footnote{\url{https://www.youtube.com/watch?v=FheQe8rflWQ}}. Colorization is triggered by button one as figure~\ref{fig:userinterface} shows. 
 
 \begin{figure}[tb!]
  \centering
@@ -351,31 +360,90 @@ CollaboVR includes a user interface for users to manipulate the objects after dr
  }~\label{fig:userinterface}
 \end{figure}
 
+\subsection{Other}
+Considering the system is working identical to left-hand users and right-hand users, button two is designed to switch the commands of two controllers (see figure~\ref{fig:userinterface}). Considering the user's view might be blocked by other users' avatar, we implement spectator mode. User can see the view from different users in the lower right corner. To encourage all the users work on the task together, we implement a permission strategy. There is only one user we can draw at one time. Once the user who is drawing release the permission, other users can grab the permission to draw. Figure~\ref{fig:userinterface} shows the permission indicator.
+
 \section{Use Cases}
 CollaboVR is designed as a reconfigurable framework for users to communicate in VR. Here we envision the potential user cases for CollaboVR.
 
-\subsubsection{Daily Life Schedule}
+\subsubsection{Daily Life Schedule and Brainstorming}
+CollaboVR could be used for daily life schedule as figure~\ref{fig:teaser}(a) shows. With default user arrangement and input orientation, the experience is close to white-board writing. CollaboVR enables free-hand drawing, so users can write and draw their plans and coordinate with friends. Shapes and colors are useful while scheduling. When they have different ideas, user can easily duplicate the current drawing onto another interactive board to express new branches.
 
 \subsubsection{Presentation}
+CollaboVR could be used for presentation figure~\ref{fig:teaser}(b) shows. By enabling the mirrored user arrangement and the default input orientation, the presenter and the audience will be placed on two sides of the content. It is easy for the presenter to know where is the audience's focus and useful for the audience to follow the presenter's gesture and content at the same time.
 
 \subsubsection{Spatial Arrangement}
+CollaboVR can help with spatial arrangement especially for 3D scenarios. Imaging the user just moves in to a new apartment and needs to discuss the placement of the furniture with roommate. As figure~\ref{fig:teaser}(c) shows, user can draw furniture with the combinations of primitive shapes and place them directly at the place they prefer. The spatial arrangement is difficult to be described clearly through words and gestures. And it often requires multiple views when using drawings.
 
 \subsubsection{Item Design}
+CollaboVR can help with collaborative design. By enabling the mirrored user arrangement and horizontal input orientation, user can draw their ideas in detail with friends. The experience is close to drawing on a digital tablet with a pen. Other users can explain their opinions while pointing at the area of interest.
 
 \section{User Study: System Evaluation}
+
 In this study, we evaluated the interaction cycle, design variables and prototype implementation of CollaboVR. We were interested in how participants use the system. During the study, we collected primarily qualitative feedback to gain insight into the experience of using the system.
+
 \subsection{Tasks and Procedure}
-[...]
+Participants were grouped by four. Each group was first given an introduction to the user study and gave consent for video recording. Then they were given a 10 minute lecture through a large monitor on how to use application: Chalktalk. We described how to do freehand drawing and how to create pre-defined 3D objects.
+Then for 10 minutes participants were given a live demo on how to use CollaboVR. One experimenter put on the headset and described how to use each controller button and the functionality in the system, including getting permission to draw, manipulating drawings and objects in 3D and other functionalities.
+After that, each participant was moved to separate rooms. They learned how to use CollaboVR individually until all of them were able to conduct drawing and manipulation. Then they went to the shared virtual environment for design tasks. 
+
 \subsubsection{Living room design}
+All the groups were asked to experience three 10-minute sessions. 
+Each session has different combinations for user arrangement and input orientation: condition1 is default user arrangement and input orientation, condition2 is mirrored user arrangement and default input orientation, condition3 is default user arrangement and horizontal input orientation.
+We counterbalanced the order of the conditions for each group using Latin Square. For each session, the participants were asked to design a living room containing only three items: one table, one chair and one couch. 
+Each participant picked one item and wrote down their designs for the item and the layout of the three items. Then they use CollaboVR to express their original ideas and reach an agreement for the living room design. After each session, they wrote down their final decisions for the design of the living room. The writing will be used for further analysis.
+We provided three items for the group (four people) so they needed to resolve conflicts and come up with a final decision for the design of living room.
+
 \subsubsection{Semi-structured interview}
-Upon completion of all the configurations, we presented users with a set of statements and asked them to rate how much they agreed with each of them, on a 7-point Likert scale. We then went into a semi-structured interview asking about their experience, trying to gain insight into the usability of the system.
+Upon completion of all the sessions, we presented users with a set of statements and asked them to rate how much they agreed with each of them on a 7-point Likert scale. We then went into a semi-structured interview asking about their experience, trying to gain insight into the usability of the system.
+
 \subsection{Participants}
-We recruited a total of 12 participants ( females; age range: ?? - ??, with an average of ??? and standard deviation of ??) via campus email lists and word-of-mouth. None of the participants had been involved with this project before.
+We recruited a total of 12 participants (5 females and 1 left-handed; age range: 20 - 30, $M=23.58$, $SD=3.45$) via campus email lists and word-of-mouth. None of the participants had been involved with this project before. Participants have various VR experience (Rating scale, 1 less experience to 7 a lot of experience, $M=4.08$, $SD=1.83$).
+
+\subsection{Apparatus}
+CollaboVR is implemented in Unity on Windows desktops with Nvidia GTX 1080 cards. We used Oculus Rift CV1 with two Oculus Touch controllers, which we paired with one of four computers during the experiments. We connected the four computers to the router through Ethernet cables.
+
+\subsection{Data Collection and Analysis}
+The study mainly focused on the system usability and qualitative feedback from the survey and interview. In addition, we conducted one-way analysis of variance (ANOVA) statistical tests to examine the differences between different user arrangement and input orientation on task performance. The task performance is defined as the details of the living room design for each session. We analyzed the writing by calculating the amount of the details such as color, shape, texture and layout. Our null hypothesis is that across different user arrangements and input orientations, there is no difference in task performance. We predict that (1) the mirrored user arrangement foster higher performance and (2) the horizontal input orientation leads to lower performance. Questionnaire data that related to usability of user arrangement and input orientation were analyzed using repeated measures analysis of variance (RM-ANOVA). The level of significance was set at $p<0.05$.
 
 \subsection{Results and Discussion} 
-// remember to put a bar-chart diagram
-\subsubsection{Usability // Overall}
-\subsubsection{User Representation}
+\begin{figure}[tb!]
+ \centering
+ \includegraphics[width=0.98\columnwidth]{usability.png}
+ \caption{Agreement distribution of the post-task questionnaire for system usability. The further bars extend to the right, the more users agree.
+ }~\label{fig:usability}
+\end{figure}
+\subsubsection{Usability}
+CollaboVR's pipeline was quickly understood by all users. Knowing how to get the permission, conducting free-hand drawing, drawing 3D objects, manipulating the drawing afterwards, and spectating other users. 83.33\% of the participants agreed that the system is easy to use ($M=5.67$, $SD=0.98$). \textit{``It is intuitive to do the drawing in 3D.''} and participant found out the permission strategy design is useful \textit{``Having to get permission to draw is really good at making the environment easier to work in''}(P7,F).
+91.67\% of the participants agree that it is helpful to show/express the idea ($M=5.75$, $SD=0.87$). 
+\begin{quote}
+    There could be merit once you're doing something more complex to 'hey look, this thing, let's do x,y,z...' and that's a lot easier to use this system (P11,M).    
+\end{quote}
+91.67\% of the participants agree that it is easy to follow the content partner is working on ($M=4.92$, $SD=1.08$).
+83.33\% of the participants agree that it is helpful to keep track of partner's idea ($M=5.42$, $SD=1.50$). Partly because the users can \textit{``move themselves easily (P1,M)''}, they can easily follow the partner's drawing and thoughts.
+75\% of the participants agree to use this tool to collaborate on personal projects ($M=4.17$, $SD=1.75$). 
+\begin{quote}
+    That's what I'd use for my own work. It's like a more --not quite as artsy -- business tool. I would use it to get my ideas across to people.(P8,M)
+\end{quote}
+
+91.67\% of the participants think CollaboVR is helpful to communication and collaboration ($M=5.33$, $SD=0.65$). 
+83.33\% of the participants agreed that they can anticipate what the partner would do next ($M=4.92$, $SD=1.08$). P3(F) commented that \textit{``When [...] started to draw the legs for the table, I quickly get his idea about the design of the legs, so he doesn't need to say what kind of legs he wants''}. Participants found it an engaged experience and love to spend more time with friends. \textit{``It's definitely a fun environment, entertaining''}(P7,M).
+
+\begin{table*}
+  \centering
+  \begin{tabular}{l l l l l l l l l l l}
+    % \toprule
+    & \multicolumn{2}{c}{Condition1} & \multicolumn{2}{c}{Condition2} & \multicolumn{2}{c}{Condition3} & \multicolumn{2}{c}{ANOVA between C1 and C2} & \multicolumn{2}{c}{ANOVA between C1 and C3} \\
+    \cmidrule
+    Performance & 9.67 & (1.53) & 9 & (2) & 5.33 & (2.08) & $F_(_1_,_5_)=0.21$ & 0.67 & 8.45 & 0.04*\\
+    Easy to use & 5.67 & (0.98) & 6 & (1.04) & 4 & (1.71) & 0.65 & 0.43 & 8.59 & 0.008*
+    % \bottomrule
+  \end{tabular}
+  \caption{Mean values and standard deviations (in parentheses) for performance and questionnaire results, and ANOVA results between condition1 and other conditions.}~\label{tab:result}
+\end{table*}
+\subsubsection{User Arrangement}
+
+
 \subsubsection{Input Orientations}
 
 
