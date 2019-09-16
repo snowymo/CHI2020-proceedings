@@ -153,12 +153,12 @@
 }
 
 \teaser{
-\begin{subfigure}
+%\begin{subfigure}
     \includegraphics[width=0.2\paperwidth]{figures/sigchi-logo}
     \includegraphics[width=0.2\paperwidth]{presentation.jpg}
     \includegraphics[width=0.2\paperwidth]{spatialarrangement.jpg}
     \includegraphics[width=0.2\paperwidth]{itemdesign.jpg}
-\end{subfigure}
+%\end{subfigure}
 \caption{Insert a caption below each figure. Do not alter the
     Caption style.  One-line captions should be centered; multi-line
     should be justified. }
@@ -425,6 +425,7 @@ CollaboVR's pipeline was quickly understood by all users. Knowing how to get the
 \begin{quote}
     That's what I'd use for my own work. It's like a more --not quite as artsy -- business tool. I would use it to get my ideas across to people.(P8,M)
 \end{quote}
+Similarly, P11(M) thought \textit{``It's totally a great prototyping idea/prototyping system. Can't say it'll replace AutoCAD, but in a few years it will do that.''}
 
 91.67\% of the participants think CollaboVR is helpful to communication and collaboration ($M=5.33$, $SD=0.65$). 
 83.33\% of the participants agreed that they can anticipate what the partner would do next ($M=4.92$, $SD=1.08$). P3(F) commented that \textit{``When [...] started to draw the legs for the table, I quickly get his idea about the design of the legs, so he doesn't need to say what kind of legs he wants''}. Participants found it an engaged experience and love to spend more time with friends. \textit{``It's definitely a fun environment, entertaining''}(P7,M).
@@ -434,46 +435,36 @@ CollaboVR's pipeline was quickly understood by all users. Knowing how to get the
   \begin{tabular}{l l l l l l l l l l l}
     % \toprule
     & \multicolumn{2}{c}{Condition1} & \multicolumn{2}{c}{Condition2} & \multicolumn{2}{c}{Condition3} & \multicolumn{2}{c}{ANOVA between C1 and C2} & \multicolumn{2}{c}{ANOVA between C1 and C3} \\
-    \cmidrule
-    Performance & 9.67 & (1.53) & 9 & (2) & 5.33 & (2.08) & $F_(_1_,_5_)=0.21$ & 0.67 & 8.45 & 0.04*\\
-    Easy to use & 5.67 & (0.98) & 6 & (1.04) & 4 & (1.71) & 0.65 & 0.43 & 8.59 & 0.008*
+    \midrule
+    Performance & 9.67 & (1.53) & 9 & (2) & 5.33 & (2.08) & $F_{(1,5)} = 0.21$ & $p = 0.67$ & $F_{(1,5)} =8.45$ & $p = 0.04*$\\
+    Easy to use & 5.67 & (0.98) & 6 & (1.04) & 4 & (1.71) & $F_{(1,23)}=0.65$ & $p=0.43$ & $F_{(1,23)}=8.59$ & $p=0.008*$\\
     % \bottomrule
   \end{tabular}
   \caption{Mean values and standard deviations (in parentheses) for performance and questionnaire results, and ANOVA results between condition1 and other conditions.}~\label{tab:result}
 \end{table*}
-\subsubsection{User Arrangement}
 
+\subsubsection{User Arrangement}
+From table~\ref{tab:result}, there is no significant differences between default user arrangement and mirrored user arrangement for task performance and easy to use. However, 58.33\% of the participants rate this session as the favorite one. Probably because the users have better workspace awareness in this session and they can keep the content and the others in the view together. \textit{``[...] mirrored, it is easy and convenient to communicate with others''} from P3(F) and \textit{``People didn't block my view, and I could see the content clearly''} from P5(M) shared the similar thoughts. 33\% of the participants prefer the default setup most. P2(M) commented \textit{``Because it is comparable to reality.''}. P1(M) had similar opinion. We thought there might be two reasons. One is that some participants have less VR experience. This session is the closest setup comparing to real life. So they can get used to it quickly. The other reason is that mirrored user arrangement will flip other users to the other side of the interactive board. That might lead to the feeling of \textit{``I felt really far away from everyone''}(P7,F).
+
+Then we collect the feedback of the suitable scenario for different user arrangement. Mirrored user arrangement could be user for giving a presentation. P4(M) suggested that because \textit{``You can better control your drawing meanwhile keep an eye on people's reaction through the mirror''}. P5(M) thought about it from a student's view, \textit{``Kind of felt like Khan Academy in 3D vision''}. This is quite consistent to previous work focusing on face-to-face experience. P9(F) thought she can benefit from this setup when brainstorming because no one is blocking the view, \textit{``You can see everybody but you have your own space to work in''}.
 
 \subsubsection{Input Orientations}
+From table~\ref{tab:result}, we can see that significant differences were found between different input orientation. Horizontal input orientation has negative impacts on performance and usability. P8(M) commented that \textit{``I think this setup could be really good. Like the tablet. The horizontal board should be slanted more''}. P8(M) is a 3D modeler who used tablet a lot for detailed drawing. So he has more experience with the tablet style input. However, P12(F) felt \textit{``that type of idea works well with a physical tablet''}. The reasons why this setup has negative impacts is probably because most participants are not familiar with such kind of input. We render the same thing on both the personal horizontal board and the shared vertical board. Some user found it difficult to create the correct mapping between the two views. Another reason is that users can rest their elbows on the chair arm when drawing, so they enjoy drawing longer than drawing in the mid-air. Furthermore, participants tended to draw richer details because they felt liking holding a pen. 8.3\% of the participants prefer this setup most and emphasized that \textit{``I had more control over what I was drawing''}. To summarize, horizontal input orientation enables users to draw or write like on a tablet. That encourages the users to draw for a longer time and brings more control to the users. However, users may need more time to get used to the style.
 
+When discussing the suitable scenarios for this setup, P8(M) thought a live demo or presentation could be beneficial from that, especially a time consuming one. He described \textit{``himself giving a presentation to other people looking at the big monitor while an audience was looking at the large monitor-like board''} and \textit{``just want to focus on the board''}. Meanwhile, P11(M) thought it is helpful for collaborative design and suggested us to replace the controller with a pen. We found all of the thoughts are very inspiring.
 
-\section{Limitation and Future Work}
+\section{Discussion, Limitation and Future Work}
+The results of our study roughly proved that CollaboVR can be used to communicate with others for non-expert use such as brainstorming and presentation. The system is relatively easy to use and the experience is engaging and entertaining. Participants are willing to hangout with friend in the system. Considering two variance we proposed, mirrored user arrangement has positive but not significant effect on the experience. The users feel the others are synced up with them because of awareness. Horizontal input orientation shows the potential for detailed and long-time experience. However, the learning curve is larger than other setups for user who has less tablet experience. In addition, a physical tablet~\cite{sensel} or a pen~\cite{wu2017dodecapen} as input could be helpful for this setup. 
+
+One limitation of the user study is the diversity of the participants. Most participants are from the department of computer science and the range of the age is not wide enough. The results of our study may not generalized to users such as artist, financial person and older adults. One limitation of the system is that participants found it difficult to track who was speaking. Either visual hints like attaching a speaker to the avatar or mouse tracking will be useful.
+
+In future, we plan to conduct more user study to explore how CollaboVR affect the communication in different scenarios such as presentation and brainstorming. Inspired by P7(F), supporting search engine is an interesting direction too. We also want to investigate other user arrangement and input orientation.
 
 \section{Conclusion}
+In this paper we presented CollaboVR - an open-source reconfigurable framework for distributed and co-located multi-user communication in VR. We described the system architecture, two key variables (user arrangement and input orientation), user interface and its implementation. The system was evaluated in a user study showing that user can easily use the system, found it useful for communication and entertaining. We also evaluate the key variables in terms of the performance and usability. Users reported that different combinations of two key variables work differently for different collaborative purposes.
 
-
-%\begin{figure}
-%\centering
-  %\includegraphics[width=0.9\columnwidth]{figures/sigchi-logo}
-  %\caption{Insert a caption below each figure. Do not alter the
-    %Caption style.  One-line captions should be centered; multi-line
-    %should be justified. }~\label{fig:figure1}
-%\end{figure}
-
-%\subsection{References and Citations}
-%(e.g., ``[Borriello, personal communication]'').
-
-% Use a numbered list of references at the end of the article, ordered
-% alphabetically by first author, and referenced by numbers in
-% brackets~\cite{ethics, Klemmer:2002:WSC:503376.503378,
-%   Mather:2000:MUT, Zellweger:2001:FAO:504216.504224}. For papers from
-% conference proceedings, include the title of the paper and an
-% abbreviated name of the conference (e.g., for Interact 2003
-% proceedings, use \textit{Proc. Interact 2003}). Do not include the
-% location of the conference or the exact date; do include the page
-% numbers if available. See the examples of citations at the end of this
-% document. Within this template file, use the \texttt{References} style
-% for the text of your citation.
+\section{Acknowledgments}
+We thank all the volunteers for participating in our experiments and video shoots.
 
 % Your references should be published materials accessible to the
 % public.  Internal technical reports may be cited only if they are
@@ -505,21 +496,10 @@ CollaboVR's pipeline was quickly understood by all users. Knowing how to get the
     %table grid lines.}~\label{tab:table1}
 %\end{table}
 
-
 %Place figures and tables at the top or bottom of the appropriate
 %column or columns, on the same page as the relevant text (see
 %Figure~\ref{fig:figure1}). A figure or table may extend across both
 %columns to a maximum width of 17.78 cm (7 in.).
-
-%\begin{figure*}
-  %\centering
-  %\includegraphics[width=1.75\columnwidth]{figures/map}
-  %\caption{In this image, the map maximizes use of space. You can make
-    %figures as wide as you need, up to a maximum of the full width of
-    %both columns. Note that \LaTeX\ tends to render large figures on a
-    %dedicated page. Image: \ccbynd~ayman on
-    %Flickr.}~\label{fig:figure2}
-%\end{figure*}
 
 %Captions should be Times New Roman or Times Roman 9-point bold.  They
 %should be numbered (e.g., ``Table~\ref{tab:table1}'' or
@@ -533,22 +513,6 @@ CollaboVR's pipeline was quickly understood by all users. Knowing how to get the
 %at the appropriate printing resolution (usually 300 dpi).
 
 %Quotations may be italicized when \textit{``placed inline''}.
-
-%\begin{quote}
-%Longer quotes, when placed in their own paragraph, need not be
-%italicized or in quotation marks when indented.  
-%\end{quote}
-
-%\begin{itemize}
-%\item Write in a straightforward style.
-%\item Try to avoid long or complex sentence structures.
-%\item Briefly define or explain all technical terms that may be
-  %unfamiliar to readers.
-%\item Be careful with the use of gender-specific pronouns (he, she)
-  %and other gendered words (chairman, manpower, man-months). Use
-  %inclusive language that is gender-neutral (e.g., she or he, they,
-  %s/he, chair, staff, staff-hours, person-years). See the
-%\end{itemize}
 
 %\begin{enumerate}
 %\item Add alternative text to all figures
